@@ -6,7 +6,7 @@ exports.getDashboardStats = async (req, res) => {
     const [departmentRows] = await pool.query('SELECT COUNT(DISTINCT department) AS totalDepartments FROM employees');
     const [projectRows] = await pool.query('SELECT COUNT(*) AS totalProjects FROM projects');
     const [recentRows] = await pool.query('SELECT COUNT(*) AS recentlyAdded FROM employees WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)');
-    const [projectWorkRows] = await pool.query('SELECT COUNT(DISTINCT employee_id) AS employeesWithProjects FROM projects WHERE project_status = "In Progress"');
+    const employeesWithProjects = 0;
 
     res.json({
       totalEmployees: employeeRows[0].totalEmployees,
@@ -15,7 +15,7 @@ exports.getDashboardStats = async (req, res) => {
       totalDepartments: departmentRows[0].totalDepartments,
       totalProjects: projectRows[0].totalProjects,
       recentlyAddedEmployees: recentRows[0].recentlyAdded,
-      employeesWithProjects: projectWorkRows[0].employeesWithProjects
+      employeesWithProjects: employeesWithProjects
     });
   } catch (error) {
     console.error(error);

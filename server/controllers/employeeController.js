@@ -73,7 +73,19 @@ exports.getEmployeeById = async (req, res) => {
     if (!rows.length) {
       return res.status(404).json({ message: 'Employee not found' });
     }
-    res.json(rows[0]);
+    const employee = rows[0];
+
+    // Fetch projects assigned to this employee
+    const [projects] = await pool.query(`
+      SELECT p.* 
+      FROM projects p
+      JOIN project_employees pe ON p.id = pe.project_id
+      WHERE pe.employee_id = ?
+      ORDER BY p.due_date ASC
+    `, [req.params.id]);
+
+    employee.projects = projects;
+    res.json(employee);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Failed to fetch employee' });

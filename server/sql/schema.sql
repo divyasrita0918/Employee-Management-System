@@ -24,18 +24,40 @@ CREATE TABLE IF NOT EXISTS employees (
 
 CREATE TABLE IF NOT EXISTS projects (
   id INT AUTO_INCREMENT PRIMARY KEY,
+  admin_id INT NOT NULL,
   project_name VARCHAR(150) NOT NULL,
-  project_description TEXT,
-  client_name VARCHAR(150) NOT NULL,
-  start_date DATE NOT NULL,
-  end_date DATE,
-  project_status VARCHAR(30) NOT NULL DEFAULT 'Not Started',
+  description TEXT,
+  category VARCHAR(100),
   priority VARCHAR(20) NOT NULL DEFAULT 'Medium',
-  assigned_by VARCHAR(100) NOT NULL,
-  remarks TEXT,
-  employee_id INT NOT NULL,
+  project_status VARCHAR(30) NOT NULL DEFAULT 'Not Started',
+  start_date DATE NOT NULL,
+  due_date DATE NOT NULL,
+  progress INT NOT NULL DEFAULT 0,
+  tags VARCHAR(255),
+  notes TEXT,
+  completion_date DATE,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  CONSTRAINT fk_projects_employee FOREIGN KEY (employee_id)
+  CONSTRAINT fk_projects_admin FOREIGN KEY (admin_id)
+    REFERENCES admins(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS project_employees (
+  project_id INT NOT NULL,
+  employee_id INT NOT NULL,
+  PRIMARY KEY (project_id, employee_id),
+  CONSTRAINT fk_pe_project FOREIGN KEY (project_id)
+    REFERENCES projects(id) ON DELETE CASCADE,
+  CONSTRAINT fk_pe_employee FOREIGN KEY (employee_id)
     REFERENCES employees(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS project_updates (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  project_id INT NOT NULL,
+  update_text VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_project_updates_project FOREIGN KEY (project_id)
+    REFERENCES projects(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+

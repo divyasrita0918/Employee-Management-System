@@ -262,3 +262,192 @@ textarea {
   }
 
 }
+
+/* ---------- Projects Management ---------- */
+
+.project-stats-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 16px;
+  background: white;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.project-stats-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+}
+
+.project-card {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(13, 110, 253, 0.08);
+}
+
+/* Priority Badges */
+.badge-priority {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 30px;
+}
+
+.badge-priority.high {
+  background-color: #fef2f2;
+  color: #ef4444;
+}
+
+.badge-priority.medium {
+  background-color: #fffbeb;
+  color: #f59e0b;
+}
+
+.badge-priority.low {
+  background-color: #f0fdf4;
+  color: #22c55e;
+}
+
+/* Status Badges */
+.badge-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 30px;
+}
+
+.badge-status.not-started {
+  background-color: #f1f5f9;
+  color: #64748b;
+}
+
+.badge-status.in-progress {
+  background-color: #eff6ff;
+  color: #3b82f6;
+}
+
+.badge-status.on-hold {
+  background-color: #fff7ed;
+  color: #ea580c;
+}
+
+.badge-status.completed {
+  background-color: #ecfdf5;
+  color: #10b981;
+}
+
+/* Progress Bar Customizations */
+.progress-bar-wrapper {
+  background: #f1f5f9;
+  border-radius: 8px;
+  height: 10px;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.progress-bar-inner {
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tags styling */
+.project-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  background: #f1f5f9;
+  color: #475569;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+
+/* Timeline components */
+.timeline {
+  position: relative;
+  padding-left: 24px;
+  margin-top: 15px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 5px;
+  bottom: 5px;
+  width: 2px;
+  background: #e2e8f0;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -21px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #3b82f6;
+  border: 2px solid white;
+}
+
+.timeline-time {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  display: block;
+  margin-top: 2px;
+}
+
+.timeline-text {
+  font-size: 0.875rem;
+  color: #334155;
+  font-weight: 500;
+}
+
+/* Dynamic Interactive Controls */
+.project-search-input {
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  padding-left: 40px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748b' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  background-size: 16px;
+}
+
+.project-search-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+/* Grid controls container */
+.projects-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.projects-controls > * {
+  flex: 1;
+  min-width: 180px;
+}
+
+@media (max-width: 768px) {
+  .projects-controls > * {
+    flex: 1 1 100%;
+  }
+}
